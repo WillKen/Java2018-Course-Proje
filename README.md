@@ -1,1 +1,1 @@
-# Java2018-Course-Proje
+# Java2018-Course-Project
