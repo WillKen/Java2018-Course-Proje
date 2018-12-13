@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+//zwkswez
 public class Game extends JFrame {
     private static final long serialVersionUID = 1L;
     private static Background backgroundpanel;
