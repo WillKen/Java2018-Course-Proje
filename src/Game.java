@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-//zyq zze zwk
+//zze zyq zwk
 public class Game extends JFrame {
     private static final long serialVersionUID = 1L;
     private static Background backgroundpanel;
