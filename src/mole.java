@@ -2,10 +2,8 @@ import java.awt.Container;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.event.*;
-import javax.swing.*;
 
-
-public class monster extends JLabel implements Runnable {
+public class mole extends JLabel implements Runnable {
     
     private static final long serialVersionUID = 1L;
     
@@ -17,7 +15,7 @@ public class monster extends JLabel implements Runnable {
     private int num = 0;
     
     //地鼠是否被击中
-    public boolean hited=false;
+    public boolean hit=false;
     private Thread thread;// 将线程作为成员变量
     
     //容器，原来好像是判断鸟是否飞过屏幕边缘的，现在貌似没什么用
@@ -26,7 +24,7 @@ public class monster extends JLabel implements Runnable {
     //地鼠持续的时间
     private double show_time = 10;
     
-    //emmmm这个貌似之前是为了让鸟产生向前飞的效果，地鼠不会动貌似没什么用，不过目测可以改成动态png。。。
+    //这个貌似之前是为了让鸟产生向前飞的效果，地鼠不会动貌似没什么用，不过目测可以改成动态png。。。
     private int sleepTime=5;
     
     //加速比，随分数的增加地鼠的持续时间减少
@@ -35,10 +33,10 @@ public class monster extends JLabel implements Runnable {
     //打掉地鼠的分数
     private int bonus = 1;
         
-    public monster(int x,int y,int time,int score,int num) {
+    public mole(int x,int y,int time,int score,int num) {
                 super();
                 // 创建地鼠图标对象，这里的图片都没有，找到图片重命名一下放在文件目录下即可
-                ImageIcon icon = new ImageIcon(getClass().getResource("bird1.gif"));
+                ImageIcon icon = new ImageIcon(getClass().getResource("monster.png"));
                 setIcon(icon);// 设置控件图标
                 // 添加控件事件监听器
                 addComponentListener(new ComponentAction());
@@ -82,7 +80,7 @@ public class monster extends JLabel implements Runnable {
     }
     //地鼠被打中后
     public void Die(){
-        hited=true;
+        hit=true;
         ImageIcon icon = new ImageIcon(getClass().getResource("bird1die.png"));
         setIcon(icon);// 设置控件图标
         

@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-//zze zyq zwk
 public class Game extends JFrame {
     private static final long serialVersionUID = 1L;
     private static Background backgroundpanel;
@@ -50,7 +49,7 @@ public class Game extends JFrame {
     private static JButton button1;
     private static JButton button2;
 
-    private static monster[] mouse;
+    private static mole[] mouse;
     
     //生成普通地鼠还是加分地鼠
     private int bonus;
@@ -89,7 +88,7 @@ public class Game extends JFrame {
         button2.setLocation(690, 760);
         button2.addMouseListener(new MenuMouseListener3());
         backgroundpanel.add(button2);
-        mouse=new monster[8];
+        mouse=new mole[8];
     }
     public static void main(String[] args) {
         Game game=new Game();
@@ -199,7 +198,7 @@ public class Game extends JFrame {
                             
                             //让地鼠产生在随机位置，这里位置有问题
                             System.out.println(i);
-                            mouse[i]=new monster((int)(Math.random()*3+1)*200,(int)(Math.random()*3+1)*200,show_time,bonus,i);
+                            mouse[i]=new mole((int)(Math.random()*3+1)*200,(int)(Math.random()*3+1)*200,show_time,bonus,i);
                             mouse[i].setSize(200, 200);// 设置控件初始大小，即地鼠图标大小
                             //背景添加地鼠
                             backgroundpanel.add(mouse[i]);
@@ -237,7 +236,7 @@ public class Game extends JFrame {
             {
                 i=Mouse.getX();
                 j=Mouse.getY();
-            	if(mouse[a]!=null&&!mouse[a].hited)
+            	if(mouse[a]!=null&&!mouse[a].hit)
             	{
             		//如果击中地鼠的范围
             		flag=(i>=mouse[a].getX()&&i<mouse[a].getX()+400)&&(j>=mouse[a].getY()&&j<=mouse[a].getY()+400);
