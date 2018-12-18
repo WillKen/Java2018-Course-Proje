@@ -35,7 +35,7 @@ public class Game extends JFrame {
     //生成地鼠的间隔
     private int sleepTime=2000;
     //地鼠消失的间隔
-    private int show_time = 200;
+    private int show_time = 2000;
     //得分数
     private static int score=0;
     //剩余地鼠的个数（待定）
@@ -94,7 +94,7 @@ public class Game extends JFrame {
     	public void mousePressed(final MouseEvent e) {
     		//如果是简单，每隔2.5秒生成一个地鼠
     		if(e.getButton()==e.BUTTON1){
-    			sleepTime=2500;
+    			show_time=2500;
     			GameThread gamethread=new GameThread();
     			gamethread.start();
     		}
@@ -105,7 +105,7 @@ public class Game extends JFrame {
         public void mousePressed(final MouseEvent e) {
         	//为复杂，1.5秒一个地鼠
         	if(e.getButton()==e.BUTTON1/*button1指鼠标左键*/){
-        		sleepTime=1500;
+        		show_time=1500;
         		GameThread gamethread=new GameThread();
         		gamethread.start();
         	}
@@ -116,7 +116,7 @@ public class Game extends JFrame {
     	public void mousePressed(final MouseEvent e) {
     		//难度为复杂
     		if(e.getButton()==e.BUTTON1){
-    			sleepTime=800;
+    			show_time=800;
     			GameThread gamethread=new GameThread();
     			gamethread.start();
     		}
@@ -239,7 +239,7 @@ public class Game extends JFrame {
             		//如果击中地鼠的范围
             		flag=(i>=mouse[a].getX()&&i<mouse[a].getX()+400)&&(j>=mouse[a].getY()&&j<=mouse[a].getY()+400);
             	}
-            	if(flag){
+            	if(flag&&mouse[a]!=null){
             		//调用该地鼠的死亡函数
             		mouse[a].Die();
             	}
