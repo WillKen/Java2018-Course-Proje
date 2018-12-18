@@ -97,7 +97,7 @@ public class mole extends JLabel implements Runnable {
         }
         public void run(){
         try {
-            //thread.stop();
+            thread.stop();
 
                 float time=0;
 

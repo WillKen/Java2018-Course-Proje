@@ -38,6 +38,7 @@ public class Game extends JFrame {
     
     //地鼠消失的间隔
     private int show_time = 200;
+//    private int die_time=2000;
 
     //得分数
     private static int score=0;
