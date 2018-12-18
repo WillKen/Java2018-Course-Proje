@@ -15,7 +15,7 @@ public class mole extends JLabel implements Runnable {
     private int num = 0;
     
     //地鼠是否被击中
-    public boolean hit=false;
+    public boolean hit = false;
     private Thread thread;// 将线程作为成员变量
     
     //容器，原来好像是判断鸟是否飞过屏幕边缘的，现在貌似没什么用
@@ -69,7 +69,7 @@ public class mole extends JLabel implements Runnable {
 	        for (int i = 0; i <show_time; i++) {
 	        		//这里的x,y都不会变的，所以地鼠位置不动，这段等能跑了可以改
 	                  setLocation(position_x, position_y);
-	                  thread.sleep(sleepTime);
+	                  Thread.sleep(sleepTime);
 	        }
 	        System.out.println("显示结束"+this.num);
 	        Game.removemouse(num);
@@ -105,11 +105,12 @@ public class mole extends JLabel implements Runnable {
                 setIcon(icon);// 设置控件图标
                 for (int i = 0; i < 100; i++) {
                     setLocation(position_x, position_y--);// 向上移动组件
-                    thread.sleep(sleepTime);// 休眠片刻
+                    Thread.sleep(sleepTime);// 休眠片刻
                     time+=sleepTime;
                 }
                 sleep(500);
                 } catch (InterruptedException e) {
+                	System.out.println("这里有错");
                         e.printStackTrace();
                 }
                 Game.removemouse(num);

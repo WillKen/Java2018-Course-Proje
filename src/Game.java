@@ -35,6 +35,7 @@ public class Game extends JFrame {
     
     //生成地鼠的间隔
     private int sleepTime=2000;
+    
     //地鼠消失的间隔
     private int show_time = 200;
 
@@ -201,7 +202,9 @@ public class Game extends JFrame {
                             mouse[i]=new mole((int)(Math.random()*3+1)*200,(int)(Math.random()*3+1)*200,show_time,bonus,i);
                             mouse[i].setSize(200, 200);// 设置控件初始大小，即地鼠图标大小
                             //背景添加地鼠
+                            System.out.println(">>>"+i);
                             backgroundpanel.add(mouse[i]);
+                            System.out.println("???"+i);
                             break;
                         }
                     }
@@ -209,6 +212,7 @@ public class Game extends JFrame {
                     	//这一块没太看懂先放着
                       sleep(sleepTime+(int)Math.random()*1000);
                     } catch (InterruptedException e) {
+                    	System.out.println("这里有错");
                         e.printStackTrace();
                     }
                 } 
