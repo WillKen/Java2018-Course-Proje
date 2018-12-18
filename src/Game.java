@@ -126,7 +126,7 @@ public class Game extends JFrame {
                 }
     }
     private void gameOver() {
-            backgroundpanel.setImage(new ImageIcon(getClass().getResource("bird1.gif")).getImage());
+            backgroundpanel.setImage(new ImageIcon(getClass().getResource("mole.png")).getImage());
             //重新绘制backgroundpanel
             backgroundpanel.repaint();
             scoreLabel.setFont(new Font("宋体", Font.PLAIN, 48));

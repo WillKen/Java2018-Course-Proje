@@ -36,7 +36,7 @@ public class mole extends JLabel implements Runnable {
     public mole(int x,int y,int time,int score,int num) {
                 super();
                 // 创建地鼠图标对象，这里的图片都没有，找到图片重命名一下放在文件目录下即可
-                ImageIcon icon = new ImageIcon(getClass().getResource("monster.png"));
+                ImageIcon icon = new ImageIcon(getClass().getResource("mole.png"));
                 setIcon(icon);// 设置控件图标
                 // 添加控件事件监听器
                 addComponentListener(new ComponentAction());
