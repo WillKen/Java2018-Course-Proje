@@ -5,6 +5,7 @@ public class Boom extends mole{
 		super(x, y, time, score, num);
 		// TODO Auto-generated constructor stub
 		
+		
 	}
 	
 

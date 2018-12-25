@@ -33,6 +33,7 @@ public class mole extends JLabel implements Runnable {
     	this.position_x = x;
     	this.position_y = y;
     	this.num = num;
+    	this.bonus = score;
     	thread = new Thread(this);// 创建线程对象
     }
     

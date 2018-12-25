@@ -186,6 +186,7 @@ public class Game extends JFrame {
             				bonus=1;
             			}
             			else{
+            				System.out.println("这是加分地鼠");
             				bonus=2;
             			}
             			mouseNum--;
