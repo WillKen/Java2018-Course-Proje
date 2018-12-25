@@ -92,7 +92,6 @@ public class Game extends JFrame {
 
     private class MenuMouseListener1 extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
-    		//如果是简单，每隔2.5秒生成一个地鼠
     		if(e.getButton()==e.BUTTON1){
     			show_time=2500;
     			GameThread gamethread=new GameThread();
@@ -183,7 +182,6 @@ public class Game extends JFrame {
             while(mouseNum>0){
             	for(int i=0;i<8;i++){
             		if(mouse[i]==null){
-            			//随机产生加分地鼠
             			if((int)(Math.random()*10)>1){
             				bonus=1;
             			}
@@ -192,20 +190,15 @@ public class Game extends JFrame {
             			}
             			mouseNum--;
             			mouseLabel.setText("剩余地鼠数："+mouseNum);
-            			//让地鼠产生在随机位置，这里位置有问题
             			System.out.println(i);
             			mouse[i]=new mole((int)(Math.random()*3+1)*200,(int)(Math.random()*3+1)*200,show_time,bonus,i);
             			mouse[i].setSize(200, 200);// 设置控件初始大小，即地鼠图标大小
-            			//背景添加地鼠
-            			System.out.println(">>>"+i);
             			backgroundpanel.add(mouse[i]);
-            			System.out.println("???"+i);
             			break;
             		}
             	}
             	try {
-            		//这一块没太看懂先放着
-            		sleep(sleepTime+(int)Math.random()*1000);
+            		sleep(1000+(int)Math.random()*1000);
             	} 
             	catch (InterruptedException e) {
             		System.out.println("这里有错");

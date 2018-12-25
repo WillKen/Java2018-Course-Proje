@@ -16,10 +16,10 @@ public class mole extends JLabel implements Runnable {
     //容器，原来好像是判断鸟是否飞过屏幕边缘的，现在貌似没什么用
     private Container father;
     //地鼠持续的时间
-    private int show_time = 10;
-    //这个貌似之前是为了让鸟产生向前飞的效果，地鼠不会动貌似没什么用，不过目测可以改成动态png。。。
+    private int show_time = 1000;
+
     private int sleepTime=5;
-    //打掉地鼠的分数
+
     private int bonus = 1;
     
     public mole(int x,int y,int time,int score,int num) {
@@ -29,9 +29,10 @@ public class mole extends JLabel implements Runnable {
     	setIcon(icon);// 设置控件图标
     	// 添加控件事件监听器
     	addComponentListener(new ComponentAction());
-    	this.show_time=time;
-    	this.position_x=x;
-    	this.position_y=y;
+    	this.show_time = time;
+    	this.position_x = x;
+    	this.position_y = y;
+    	this.num = num;
     	thread = new Thread(this);// 创建线程对象
     }
     
@@ -54,7 +55,6 @@ public class mole extends JLabel implements Runnable {
 
     public void run() {
     	try {
-    		//这里的x,y都不会变的，所以地鼠位置不动，这段等能跑了可以改
     		setLocation(position_x, position_y);
     		Thread.sleep(show_time);
 	        System.out.println("显示结束"+this.num);
@@ -65,13 +65,10 @@ public class mole extends JLabel implements Runnable {
     		e.printStackTrace();
     	}
     }
-    //地鼠被打中后
+    
     public void Die(){
     	hit=true;
-    	ImageIcon icon = new ImageIcon(getClass().getResource("bird1die.png"));
-    	setIcon(icon);// 设置控件图标
         Game.addScore(bonus);
-        //这里的+0.1只是为了测试用
         DieThread diethread=new DieThread();
         diethread.start();
     }
@@ -89,9 +86,7 @@ public class mole extends JLabel implements Runnable {
                 for (int i = 0; i < 100; i++) {
                 	setLocation(position_x, position_y--);// 向上移动组件
                     Thread.sleep(sleepTime);// 休眠片刻
-                    time+=sleepTime;
                 }
-                sleep(500);
         	} 
         	catch (InterruptedException e) {
         		System.out.println("Diethread这里有错");
