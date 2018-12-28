@@ -22,8 +22,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-
 public class Shop extends JFrame{
+	private boolean can_buy_w1 = true;
+	private boolean can_buy_w2 = true;
 	private player Player = player.getInstance();
 	private static final long serialVersionUID = 1L;
     private static Background backgroundpanel;
@@ -54,6 +55,7 @@ public class Shop extends JFrame{
     	buy_hp.setLocation(690, 600);
     	buy_hp.addMouseListener(new MenuMouseListener_HP());
         backgroundpanel.add(buy_hp);
+        
         
         buy_weapon_1 = new JButton("购买屠龙宝刀：1000$");
         buy_weapon_1.setFont(new Font("宋体", Font.PLAIN, 32));
@@ -94,13 +96,18 @@ public class Shop extends JFrame{
     private class MenuMouseListener_W1 extends MouseAdapter{
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
-    			if(Player.get_money()>=1000)
+    			if(Player.get_money()>=1000&&can_buy_w1)
     			{
     				Player.addatk(1);
     				Player.addmoney(-1000);
+    				can_buy_w1 = false;
+    				buy_weapon_1.setText("已售罄"); 	               
     				message.setText("你购买了屠龙宝刀，ATK+1，现在你还剩："+Player.get_money()+"$.");
+    			}else if(Player.get_money()>=1000&&!can_buy_w2)
+    			{
+    				message.setText("商品已售罄，无法再次购买！");
     			}
-    			else
+    			else 
     			{
     				message.setText("你没有足够的钱！");
     			}
@@ -110,13 +117,18 @@ public class Shop extends JFrame{
     private class MenuMouseListener_W2 extends MouseAdapter{
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
-    			if(Player.get_money()>=1000)
+    			if(Player.get_money()>=1000&&can_buy_w2)
     			{
     				Player.addatk(2);
     				Player.addmoney(-1000);
+    				can_buy_w2 = false;
+    				buy_weapon_2.setText("已售罄"); 	               
     				message.setText("你购买了尚方宝剑，ATK+2，现在你还剩："+Player.get_money()+"$.");
+    			}else if(Player.get_money()>=1000&&!can_buy_w2)
+    			{
+    				message.setText("商品已售罄，无法再次购买！");
     			}
-    			else
+    			else 
     			{
     				message.setText("你没有足够的钱！");
     			}

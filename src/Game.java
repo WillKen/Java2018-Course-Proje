@@ -27,16 +27,17 @@ public class Game extends JFrame {
     private static Background backgroundpanel;
     private int position_x;
     private int position_y;
-    //显示时间的窗口
+
     private static JLabel ammoLabel;
     //显示当前得分的窗口
     private static JLabel scoreLabel;
     private JLabel mouseLabel;
     //生成地鼠的间隔
     private int sleepTime=2000;
+    
     //地鼠消失的间隔
     private int show_time = 2000;
-    //得分数
+
     private static int score=0;
     //剩余地鼠的个数（待定）
     private static int mouseNum=50;
