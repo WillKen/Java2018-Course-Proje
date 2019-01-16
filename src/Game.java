@@ -5,7 +5,12 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,7 +25,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 
 public class Game extends JFrame {
 	private static player Player = player.getInstance();
@@ -28,21 +35,18 @@ public class Game extends JFrame {
     private static Background backgroundpanel;
     private int position_x;
     private int position_y;
-    
     private static int basicnum = 10;
     private boolean is_pass = false;
     private int target = 5;
-    
     private static JLabel ammoLabel;
     private static JLabel scoreLabel;
-    
     private static JLabel targetLabel;
     private static JLabel HPLabel;
     private static JLabel MoneyLabel;
     private JLabel mouseLabel;
-    //生成地鼠的间隔
     private int sleepTime=2000;
-    
+
+
     //地鼠消失的间隔
     private int show_time = 2000;
     //剩余地鼠的个数（待定）
@@ -68,9 +72,8 @@ public class Game extends JFrame {
         backgroundpanel.setImage(new ImageIcon(getClass().getResource("logo.jpg")).getImage());// 设置背景图片
         getContentPane().add(backgroundpanel, BorderLayout.CENTER);
         setBounds(100, 100, 1600, 900);
-        //添加鼠标点击事件
         addMouseListener(new FrameMouseListener());
-        button=new JButton("游戏开始");
+        button=new JButton("开始游戏");
         button.setFont(new Font("宋体", Font.PLAIN, 32));
         button.setForeground(Color.BLUE);
         button.setName("start");
@@ -78,20 +81,41 @@ public class Game extends JFrame {
         button.setSize(200,60);
         button.setLocation(690, 600);
         button.addMouseListener(new MenuMouseListener1());
-        backgroundpanel.add(button);
-        
+        backgroundpanel.add(button);               
         mouse = new mole[8];
     }
     
     public static void main(String[] args) {
-    	Game game = Game.getInstance();
-        game.setVisible(true);
+    	Frame f = new Frame("请输入用户名");
+        TextField tf = new TextField(20);
+        Button bu = new Button("确定");
+        f.setBounds(400, 200, 400, 300);
+        f.setLayout(new FlowLayout());
+        bu = new Button("确定");
+        f.add(tf);
+        f.add(bu);
+        bu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String s = tf.getText().toString();
+				GreetingClient t = new GreetingClient(s);
+				Player.name = t.name;
+				System.out.println(Player.name);
+				Player.setscore(t.score);
+				Player.sethp(t.HP);
+				Player.setmoney(t.money);
+		    	Game game = Game.getInstance();
+		        game.setVisible(true);
+		        f.setVisible(false);
+			}
+        });
+        f.setVisible(true);
     }
 
     public void restart()
     {
     	scoreLabel.setVisible(false);
     	basicnum+=5;
+    	target+=3;
     	mouseNum = basicnum;
     	show_time-=200;
     	Player.addscore(-1*Player.get_score());
@@ -156,9 +180,9 @@ public class Game extends JFrame {
     	{
     		this.is_pass = false;
 	    	backgroundpanel.repaint();
-	    	scoreLabel.setFont(new Font("宋体", Font.PLAIN, 48));
+	    	scoreLabel.setFont(new Font("宋体", Font.PLAIN, 88));
 	    	scoreLabel.setText("你的得分："+Player.get_score());
-	    	scoreLabel.setBounds(550, 550, 500, 50);
+	    	scoreLabel.setBounds(250, 200, 1000, 500);
 	    	ammoLabel.setVisible(false);
 	    	mouseLabel.setVisible(false);
     	}
@@ -336,7 +360,8 @@ public class Game extends JFrame {
             }
         }
     }*/
-    //移走地鼠，这样可以用8个数组形成很多地鼠
+    
+    //移走地鼠
     public static void removemouse(int i){
         mouse[i]=null;
     }

@@ -26,8 +26,9 @@ public class Shop extends JFrame{
 	private player Player = player.getInstance();
 	private static final long serialVersionUID = 1L;
     private static Background backgroundpanel;
-    private static JButton buy_hp;
     private static JLabel message;
+    private static JButton buy_hp;
+    private static JButton gameOver;
     private static JButton nextLevel;
 	private static Shop instance = null;
 	private Game game = Game.getInstance(); 
@@ -65,12 +66,21 @@ public class Shop extends JFrame{
 		nextLevel.setFont(new Font("宋体", Font.PLAIN, 32));
 		nextLevel.setForeground(Color.BLUE);
 		nextLevel.setName("start");
-		//nextLevel.setVisible(true);
 		nextLevel.setSize(200,60);
 		nextLevel.setLocation(700, 600);
 		nextLevel.addMouseListener(new MenuMouseListener3());
 		backgroundpanel.add(nextLevel); 
+		
+		gameOver = new JButton("结束游戏");
+		gameOver.setFont(new Font("宋体", Font.PLAIN, 32));
+		gameOver.setForeground(Color.BLUE);
+		gameOver.setName("start");
+		gameOver.setSize(200,60);
+		gameOver.setLocation(700, 700);
+		gameOver.addMouseListener(new MenuMouseListener4());
+		backgroundpanel.add(gameOver); 
     }
+    
 	private class MenuMouseListener3 extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
@@ -80,6 +90,24 @@ public class Shop extends JFrame{
     		}
     	}
     }
+	
+	private class MenuMouseListener4 extends MouseAdapter {
+    	public void mousePressed(final MouseEvent e) {
+    		if(e.getButton()==e.BUTTON1){
+    			String msg = Player.name+","+Player.get_score()+","+Player.get_hp()+","+Player.get_money();
+    			GreetingClient write = new GreetingClient(msg);
+    			backgroundpanel.setImage(new ImageIcon(getClass().getResource("timg.jpg")).getImage());
+    			backgroundpanel.repaint();
+    			buy_hp.setVisible(false);
+    			nextLevel.setVisible(false);
+    			gameOver.setVisible(false);
+    			message.setBounds(250, 200, 1000, 500);
+    			message.setFont(new Font("宋体", Font.PLAIN, 88));
+    			message.setText("你的得分：" + Player.get_score());
+    		}
+    	}
+    }
+	
     private class MenuMouseListener_HP extends MouseAdapter{
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){

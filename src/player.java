@@ -1,5 +1,6 @@
 
 public class player {
+	String name;
 	private static player instance = null;
 	private int score;
 	private int money;
@@ -17,6 +18,7 @@ public class player {
 		this.attack = attack_;
 		this.hp = hp_;
 	}*/
+	
 	public static synchronized player getInstance()
 	{
 		if(instance==null)
@@ -39,14 +41,29 @@ public class player {
 	{
 		this.score+=score_;
 	}
+	public void setscore(int score_)
+	{
+		this.score = score_;
+	}
 	public void addhp(int hp)
 	{
 		this.hp+=hp;
+	}
+	public void sethp(int hp_)
+	{
+		this.hp = hp_;
 	}
 	public void addmoney(int money_)
 	{
 		this.money+=money_;
 	}
-	
+	public void setmoney(int money_)
+	{
+		this.money = money_;
+	}
+	public void setname(String username)
+	{
+		name = username;
+	}
 	
 }
