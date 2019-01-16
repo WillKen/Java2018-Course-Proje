@@ -1,5 +1,3 @@
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
@@ -14,11 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import static java.lang.Thread.sleep;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JApplet;
 import javax.swing.JButton;
@@ -27,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.applet.AudioClip; 
+
 
 
 public class Game extends JFrame {
@@ -48,7 +44,7 @@ public class Game extends JFrame {
 
 
     //地鼠消失的间隔
-    private int show_time = 2000;
+    private int show_time = 1000;
     //剩余地鼠的个数（待定）
     private static int mouseNum = 10;
     //三个不同的难易程度的按钮
@@ -75,7 +71,7 @@ public class Game extends JFrame {
         addMouseListener(new FrameMouseListener());
         button=new JButton("开始游戏");
         button.setFont(new Font("宋体", Font.PLAIN, 32));
-        button.setForeground(Color.BLUE);
+        button.setForeground(Color.blue);
         button.setName("start");
         button.setVisible(true);
         button.setSize(200,60);
@@ -117,7 +113,7 @@ public class Game extends JFrame {
     	basicnum+=5;
     	target+=3;
     	mouseNum = basicnum;
-    	show_time-=200;
+    	show_time-=100;
     	Player.addscore(-1*Player.get_score());
     	shop.setVisible(false);
 		GameThread nextgame=new GameThread();
@@ -127,7 +123,7 @@ public class Game extends JFrame {
     private class MenuMouseListener1 extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
-    			show_time=2500;
+    			show_time=1500;
     			GameThread gamethread=new GameThread();
 	    		gamethread.start();
     		}
@@ -154,6 +150,7 @@ public class Game extends JFrame {
     	}
     	
     	backgroundpanel.setImage(new ImageIcon(getClass().getResource("timg.jpg")).getImage());
+        scoreLabel.setForeground(Color.blue);
     	if(Player.get_score()>=target)
     	{
     		this.is_pass = true;
@@ -166,7 +163,7 @@ public class Game extends JFrame {
 	    	
 	    	shop = new JButton("商店");
 	    	shop.setFont(new Font("宋体", Font.PLAIN, 32));
-	    	shop.setForeground(Color.BLUE);
+	    	shop.setForeground(Color.blue);
 	    	shop.setName("start");
 	    	shop.setVisible(true);
 	    	shop.setSize(200,60);
@@ -218,11 +215,11 @@ public class Game extends JFrame {
      private class GameThread extends Thread{
     	public void run(){
     		button.setVisible(false);
-            backgroundpanel.setImage(new ImageIcon(getClass().getResource("background0.png")).getImage());
+            backgroundpanel.setImage(new ImageIcon(getClass().getResource("bg.jpg")).getImage());
             backgroundpanel.repaint();
             scoreLabel = new JLabel();// 显示分数的标签组件
             scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            scoreLabel.setForeground(Color.blue);
+            scoreLabel.setForeground(Color.white);
             scoreLabel.setText("当前得分：");
             scoreLabel.setFont(new Font("宋体", Font.PLAIN, 24));
             scoreLabel.setBounds(20, 15, 240, 24);
@@ -230,7 +227,7 @@ public class Game extends JFrame {
             
             targetLabel = new JLabel();// 显示目标的标签组件
             targetLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-            targetLabel.setForeground(Color.blue);
+            targetLabel.setForeground(Color.white);
             targetLabel.setText("本关目标："+target);
             targetLabel.setFont(new Font("宋体", Font.PLAIN, 24));
             targetLabel.setBounds(20, 15, 400, 24);
@@ -238,7 +235,7 @@ public class Game extends JFrame {
             
             HPLabel = new JLabel();// 显示目标的标签组件
             HPLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-            HPLabel.setForeground(Color.blue);
+            HPLabel.setForeground(Color.white);
             HPLabel.setText("HP "+Player.get_hp());
             HPLabel.setFont(new Font("宋体", Font.PLAIN, 24));
             HPLabel.setBounds(20, 15, 500, 24);
@@ -246,14 +243,14 @@ public class Game extends JFrame {
             
             MoneyLabel = new JLabel();// 显示目标的标签组件
             MoneyLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-            MoneyLabel.setForeground(Color.blue);
+            MoneyLabel.setForeground(Color.white);
             MoneyLabel.setText("$ "+Player.get_money());
             MoneyLabel.setFont(new Font("宋体", Font.PLAIN, 24));
-            MoneyLabel.setBounds(20, 15, 600, 24);
+            MoneyLabel.setBounds(30, 15, 600, 24);
             backgroundpanel.add(MoneyLabel);
             
             ammoLabel = new JLabel();// 显示自动数量的标签组件
-            ammoLabel.setForeground(Color.blue);
+            ammoLabel.setForeground(Color.white);
             ammoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             ammoLabel.setFont(new Font("宋体", Font.PLAIN, 24));
             ammoLabel.setBounds(400, 15, 240, 24);
@@ -261,7 +258,7 @@ public class Game extends JFrame {
             mouseLabel=new JLabel();
             mouseLabel = new JLabel();// 显示分数的标签组件
             mouseLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            mouseLabel.setForeground(Color.blue);
+            mouseLabel.setForeground(Color.white);
             mouseLabel.setText("剩余地鼠数："+mouseNum);
             mouseLabel.setFont(new Font("宋体", Font.PLAIN, 24));
             mouseLabel.setBounds(780, 15, 240, 24);
@@ -282,10 +279,10 @@ public class Game extends JFrame {
         while(mouseNum>0&&Player.get_hp()!=0){
         	for(int i=0;i<8;i++){
         		if(mouse[i]==null){
-        			if((int)(Math.random()*10)>1&&(int)(Math.random()*10) < 8){
+        			if((int)(Math.random()*10)>3&&(int)(Math.random()*10) < 9){
         				bonus = 1;
         			}
-        			else if((Math.random()*10)<1){
+        			else if((Math.random()*10)<3){
         				System.out.println("这是加分地鼠");
         				bonus = 2;
         			}
@@ -293,12 +290,13 @@ public class Game extends JFrame {
         			{
         				bonus = -1;
         			}
-        			
         			if(bonus!=-1)
         				mouseNum--;
 	        		mouseLabel.setText("剩余地鼠数："+mouseNum);
 	        		System.out.println(i);
-	        		mouse[i]=new mole((int)(Math.random()*3+1)*200,(int)(Math.random()*3+1)*200,show_time,bonus,i);
+	        		int x = (int)(Math.random()*3+1)*400;
+	        		int y = (int)(Math.random()*3+1)*200;
+	        		mouse[i]=new mole(x,y,show_time,bonus,i);
 	        		mouse[i].setSize(200, 200);// 设置控件初始大小，即地鼠图标大小
 	        		backgroundpanel.add(mouse[i]);
 	        		break;
@@ -344,22 +342,7 @@ public class Game extends JFrame {
             }    
         }
     }
-    //加音乐的，可以先删了
-    /*public class Music extends JApplet { 
-        private static final long serialVersionUID = 1L;
-        private URL url;
-        public Music(String str){
-           try {
-                url = new URL("file:"+str);
-                AudioClip aau;
-                aau = Applet.newAudioClip(url);
-                aau.play();
-            }catch (Exception e){ 
-                e.printStackTrace();
-            }
-        }
-    }*/
-    
+
     //移走地鼠
     public static void removemouse(int i){
         mouse[i]=null;

@@ -22,12 +22,20 @@ public class mole extends JLabel implements Runnable {
 
     protected int bonus = 1;
     
+    public int getX()
+    {
+    	return position_x;
+    }
+    public int getY()
+    {
+    	return position_y;
+    }
     public mole(int x,int y,int time,int score,int num) {
     	super();
     	// 创建地鼠图标对象
     	ImageIcon icon1 = new ImageIcon(getClass().getResource("mole.png"));
-    	ImageIcon icon2 = new ImageIcon(getClass().getResource("monster.png"));
-    	ImageIcon icon3 = new ImageIcon(getClass().getResource("boom.jpg"));
+    	ImageIcon icon2 = new ImageIcon(getClass().getResource("bonusmole.png"));
+    	ImageIcon icon3 = new ImageIcon(getClass().getResource("boom.png"));
     	if(score==1)
     		setIcon(icon1);// 设置控件图标
     	else if(score==2)
@@ -100,7 +108,7 @@ public class mole extends JLabel implements Runnable {
         		}
         		else
         		{
-        			icon = new ImageIcon(getClass().getResource("blom.jpg"));
+        			icon = new ImageIcon(getClass().getResource("bloom.png"));
         		}
                 setIcon(icon);// 设置控件图标
                 for (int i = 0; i < 100; i++) {

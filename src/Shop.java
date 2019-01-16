@@ -104,6 +104,7 @@ public class Shop extends JFrame{
     			message.setBounds(250, 200, 1000, 500);
     			message.setFont(new Font("宋体", Font.PLAIN, 88));
     			message.setText("你的得分：" + Player.get_score());
+    			message.setVisible(true);
     		}
     	}
     }
