@@ -32,6 +32,15 @@ public class Shop extends JFrame{
     private static JButton buy_weapon_1;
     private static JButton buy_weapon_2;
     private static JLabel message;
+    private static JButton nextLevel;
+	private static Shop instance = null;
+	private Game game = Game.getInstance(); 
+	public static synchronized Shop getInstance()
+	{
+		if(instance==null)
+			instance = new Shop();
+		return instance;
+	}
     public Shop()
     {
     	message = new JLabel();
@@ -76,6 +85,24 @@ public class Shop extends JFrame{
         buy_weapon_2.setLocation(690, 760);
         buy_weapon_2.addMouseListener(new MenuMouseListener_W2());
         backgroundpanel.add(buy_weapon_2);    
+        
+		nextLevel = new JButton("下一关");
+		nextLevel.setFont(new Font("宋体", Font.PLAIN, 32));
+		nextLevel.setForeground(Color.BLUE);
+		nextLevel.setName("start");
+		//nextLevel.setVisible(true);
+		nextLevel.setSize(50,60);
+		nextLevel.setLocation(600, 620);
+		nextLevel.addMouseListener(new MenuMouseListener3());
+		backgroundpanel.add(nextLevel); 
+    }
+	private class MenuMouseListener3 extends MouseAdapter {
+    	public void mousePressed(final MouseEvent e) {
+    		if(e.getButton()==e.BUTTON1){
+    			setVisible(false);
+    			game.restart();
+    		}
+    	}
     }
     private class MenuMouseListener_HP extends MouseAdapter{
     	public void mousePressed(final MouseEvent e) {
@@ -135,8 +162,5 @@ public class Shop extends JFrame{
     		}
     	}	
     }
-    public static void main(String[] args) {
-    	Shop game = new Shop();
-        game.setVisible(true);
-    }
+
 }

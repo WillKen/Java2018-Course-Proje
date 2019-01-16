@@ -8,7 +8,7 @@ public class player {
 	public player()
 	{
 		this.score = 0;
-		this.money = 100000000;
+		this.money = 0;
 		this.attack = 0;
 		this.hp = 4;
 	}
