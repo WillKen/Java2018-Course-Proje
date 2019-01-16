@@ -4,29 +4,36 @@ import javax.swing.JLabel;
 import java.awt.event.*;
 
 public class mole extends JLabel implements Runnable {
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 	//地鼠的位置
-    private int position_x = 0;
-    private int position_y = 0;
+    public int position_x = 0;
+    public int position_y = 0;
     //判断地鼠标号用的
-    private int num = 0;
+    public int num = 0;
     //地鼠是否被击中
     public boolean hit = false;
-    private Thread thread;// 将线程作为成员变量
-    //容器，原来好像是判断鸟是否飞过屏幕边缘的，现在貌似没什么用
-    private Container father;
+    protected Thread thread;// 将线程作为成员变量
+
+    protected Container father;
     //地鼠持续的时间
-    private int show_time = 1000;
+    protected int show_time = 1000;
 
-    private int sleepTime=5;
+    protected int sleepTime=5;
 
-    private int bonus = 1;
+    protected int bonus = 1;
     
     public mole(int x,int y,int time,int score,int num) {
     	super();
-    	// 创建地鼠图标对象，这里的图片都没有，找到图片重命名一下放在文件目录下即可
-    	ImageIcon icon = new ImageIcon(getClass().getResource("mole.png"));
-    	setIcon(icon);// 设置控件图标
+    	// 创建地鼠图标对象
+    	ImageIcon icon1 = new ImageIcon(getClass().getResource("mole.png"));
+    	ImageIcon icon2 = new ImageIcon(getClass().getResource("monster.png"));
+    	ImageIcon icon3 = new ImageIcon(getClass().getResource("boom.jpg"));
+    	if(score==1)
+    		setIcon(icon1);// 设置控件图标
+    	else if(score==2)
+    		setIcon(icon2);
+    	else if(score == -1)
+    		setIcon(icon3);
     	// 添加控件事件监听器
     	addComponentListener(new ComponentAction());
     	this.show_time = time;
@@ -37,18 +44,18 @@ public class mole extends JLabel implements Runnable {
     	thread = new Thread(this);// 创建线程对象
     }
     
-    //销毁地鼠图片，这段没改，不知道有没有问题
-    private void destory() {
+    //销毁地鼠图片
+    protected void destory() {
     	father = getParent();
     	if (father == null)
     		return;
-    	father.remove(this);// 从父容器中移除本逐渐
+    	father.remove(this);
         father.repaint();
-        father = null; // 通过该语句终止线程循环
+        father = null; 
     }
     
     
-    private class ComponentAction extends ComponentAdapter {
+    protected class ComponentAction extends ComponentAdapter {
     	public void componentResized(final ComponentEvent e) {
     		thread.start();// 线程启动
     	}
@@ -59,7 +66,7 @@ public class mole extends JLabel implements Runnable {
     		setLocation(position_x, position_y);
     		Thread.sleep(show_time);
 	        System.out.println("显示结束"+this.num);
-	        Game.removemouse(num);                                               //*************************************************
+	        Game.removemouse(num);
 	        destory();
     	}
     	catch (InterruptedException e) {
@@ -69,13 +76,17 @@ public class mole extends JLabel implements Runnable {
     
     public void Die(){
     	hit=true;
+    	if(bonus == -1)
+    		Game.addHp(-1);
         Game.addScore(bonus);
-        DieThread diethread=new DieThread();
+        DieThread diethread=new DieThread(bonus);
         diethread.start();
     }
     
     public class DieThread extends Thread{
-    	public DieThread(){
+    	private int bonus = 1;
+    	public DieThread(int score){
+    		bonus = score;
     	}
     	
         public void run(){
@@ -83,9 +94,20 @@ public class mole extends JLabel implements Runnable {
         		thread.stop();
         		float time=0;
         		ImageIcon icon = new ImageIcon(getClass().getResource("bird1die.png"));
+        		if(bonus!=-1)
+        		{
+        			icon = new ImageIcon(getClass().getResource("bird1die.png"));
+        		}
+        		else
+        		{
+        			icon = new ImageIcon(getClass().getResource("blom.jpg"));
+        		}
                 setIcon(icon);// 设置控件图标
                 for (int i = 0; i < 100; i++) {
-                	setLocation(position_x, position_y--);// 向上移动组件
+                	if(bonus!=-1)
+                		setLocation(position_x, position_y--);// 向上移动组件
+                	else
+                		setLocation(position_x, position_y);// 向上移动组件
                     Thread.sleep(sleepTime);// 休眠片刻
                 }
         	} 

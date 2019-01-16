@@ -3,13 +3,11 @@ public class player {
 	private static player instance = null;
 	private int score;
 	private int money;
-	private int attack;
 	private int hp;
 	public player()
 	{
 		this.score = 0;
 		this.money = 0;
-		this.attack = 0;
 		this.hp = 4;
 	}
 /*public player(int score_,int money_,int attack_,int hp_)
@@ -24,11 +22,6 @@ public class player {
 		if(instance==null)
 			instance = new player();
 		return instance;
-	}
-	
-	public int get_attack()
-	{
-		return this.attack;
 	}
 	public int get_hp()
 	{
@@ -45,10 +38,6 @@ public class player {
 	public void addscore(int score_)
 	{
 		this.score+=score_;
-	}
-	public void addatk(int atk)
-	{
-		this.attack+=atk;
 	}
 	public void addhp(int hp)
 	{
