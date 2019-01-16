@@ -157,7 +157,6 @@ public class Game extends JFrame {
     	if(Player.get_score()>=target)
     	{
     		this.is_pass = true;
-	   
 	    	backgroundpanel.repaint();
 	    	scoreLabel.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 88));
 	    	scoreLabel.setText("Congratulations!");
