@@ -91,7 +91,7 @@ public class Shop extends JFrame{
 		nextLevel.setForeground(Color.BLUE);
 		nextLevel.setName("start");
 		//nextLevel.setVisible(true);
-		nextLevel.setSize(50,60);
+		nextLevel.setSize(100,60);
 		nextLevel.setLocation(600, 620);
 		nextLevel.addMouseListener(new MenuMouseListener3());
 		backgroundpanel.add(nextLevel); 

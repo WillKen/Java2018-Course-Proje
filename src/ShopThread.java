@@ -28,5 +28,6 @@ public class ShopThread extends Thread{
 	private Shop shop = Shop.getInstance();
 	public void run(){
 		shop.setVisible(true);
+		
 	}
 }

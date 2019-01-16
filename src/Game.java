@@ -89,7 +89,8 @@ public class Game extends JFrame {
     public void restart()
     {
     	scoreLabel.setVisible(false);
-    	mouseNum=5;
+    	mouseNum+=5;
+    	show_time-=100;
     	Player.addscore(-1*Player.get_score());
     	shop.setVisible(false);
 		GameThread nextgame=new GameThread();
