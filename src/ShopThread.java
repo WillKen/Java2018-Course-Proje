@@ -22,12 +22,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-
 public class ShopThread extends Thread{
     private static JButton nextLevel;
 	private Shop shop = Shop.getInstance();
 	public void run(){
 		shop.setVisible(true);
-		
 	}
 }

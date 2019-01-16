@@ -1,8 +1,7 @@
 import java.net.*;
 import java.io.*;
  
-public class GreetingClient
-{
+public class GreetingClient{
 	public String info;
 	public String name;
 	public int score;
@@ -10,19 +9,17 @@ public class GreetingClient
 	public int money;
 	
 	public GreetingClient() {
-		
 	}
-   public GreetingClient(String ss)
-   {
+	
+	public GreetingClient(String ss){
 	  name = ss;
 	  score=0;
 	  HP = 4;
 	  money=0;
       String serverName = "localhost";
       String info=ss;
-      int port = 8080;
-      try
-      {
+      int port = 6666;
+      try{
          System.out.println("连接到主机：" + serverName + " ，端口号：" + port);
          Socket client = new Socket(serverName, port);
          System.out.println("远程主机地址：" + client.getRemoteSocketAddress());
@@ -56,9 +53,28 @@ public class GreetingClient
          pw.close();
          os.close();
          client.close();
-      }catch(IOException e)
-      {
+      }catch(IOException e){
          e.printStackTrace();
       }
-   }
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public int getHP() {
+		return HP;
+	}
+	
+	public int getMoney() {
+		return money;
+	}
 }

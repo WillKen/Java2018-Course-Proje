@@ -23,8 +23,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.applet.AudioClip; 
 
-
-
 public class Game extends JFrame {
 	private static player Player = player.getInstance();
 	private static final long serialVersionUID = 1L;
@@ -42,7 +40,6 @@ public class Game extends JFrame {
     private JLabel mouseLabel;
     private int sleepTime=2000;
 
-
     //地鼠消失的间隔
     private int show_time = 1000;
     //剩余地鼠的个数（待定）
@@ -56,8 +53,7 @@ public class Game extends JFrame {
     //生成普通地鼠还是加分地鼠
     private int bonus;
 	private static Game instance = null;
-	public static synchronized Game getInstance()
-	{
+	public static synchronized Game getInstance(){
 		if(instance==null)
 			instance = new Game();
 		return instance;
@@ -107,8 +103,7 @@ public class Game extends JFrame {
         f.setVisible(true);
     }
 
-    public void restart()
-    {
+    public void restart(){
     	scoreLabel.setVisible(false);
     	basicnum+=5;
     	target+=3;
@@ -143,16 +138,14 @@ public class Game extends JFrame {
     	targetLabel.setVisible(false);
     	HPLabel.setVisible(false);
     	MoneyLabel.setVisible(false);
-    	for(int i = 0;i<8;i++)
-    	{
+    	for(int i = 0;i<8;i++){
     		if(mouse[i] != null)
     			mouse[i].setVisible(false);
     	}
     	
     	backgroundpanel.setImage(new ImageIcon(getClass().getResource("timg.jpg")).getImage());
         scoreLabel.setForeground(Color.blue);
-    	if(Player.get_score()>=target)
-    	{
+    	if(Player.get_score()>=target){
     		this.is_pass = true;
 	    	backgroundpanel.repaint();
 	    	scoreLabel.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 88));
@@ -172,8 +165,7 @@ public class Game extends JFrame {
 	        
 	    	backgroundpanel.add(shop);
     	}
-    	else
-    	{
+    	else{
     		this.is_pass = false;
 	    	backgroundpanel.repaint();
 	    	scoreLabel.setFont(new Font("宋体", Font.PLAIN, 88));
@@ -274,8 +266,7 @@ public class Game extends JFrame {
     }
 }
     
-    private void gaming()
-    {
+    private void gaming(){
         while(mouseNum>0&&Player.get_hp()!=0){
         	for(int i=0;i<8;i++){
         		if(mouse[i]==null){
@@ -286,8 +277,7 @@ public class Game extends JFrame {
         				System.out.println("这是加分地鼠");
         				bonus = 2;
         			}
-        			else
-        			{
+        			else{
         				bonus = -1;
         			}
         			if(bonus!=-1)

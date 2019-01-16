@@ -32,14 +32,14 @@ public class Shop extends JFrame{
     private static JButton nextLevel;
 	private static Shop instance = null;
 	private Game game = Game.getInstance(); 
-	public static synchronized Shop getInstance()
-	{
+	
+	public static synchronized Shop getInstance(){
 		if(instance==null)
 			instance = new Shop();
 		return instance;
 	}
-    public Shop()
-    {
+	
+    public Shop(){
     	message = new JLabel();
         message.setHorizontalAlignment(SwingConstants.CENTER);
         message.setForeground(Color.blue);
@@ -113,14 +113,12 @@ public class Shop extends JFrame{
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
     			message.setVisible(true);
-    			if(Player.get_money()>=100)
-    			{
+    			if(Player.get_money()>=100){
     				Player.addhp(1);
     				Player.addmoney(-100);
     				message.setText("你购买了HP药剂，HP+1，现在你还剩："+Player.get_money()+"$.");
     			}
-    			else
-    			{
+    			else{
     				message.setText("你没有足够的钱！");
     			}
     		}

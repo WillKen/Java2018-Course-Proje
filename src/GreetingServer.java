@@ -7,40 +7,37 @@ public class GreetingServer extends Thread
    private ServerSocket serverSocket;
    private static String information;
    
-   public GreetingServer(int port) throws IOException
-   {
+   public GreetingServer(int port) throws IOException{
       serverSocket = new ServerSocket(port);
-//      serverSocket.setSoTimeout(10000);
    }
    
    public static void DataExchange(String info,boolean rd,boolean wt){
-	   
 	information="NULL";
 	PrintWriter pw=null;
 	File file = new File("Whac-a-Mole.csv");
 	FileWriter fw = null;
 	try {
 		fw = new FileWriter(file, true);
-	   } catch (IOException e3) {
+	} catch (IOException e3) {
 	    // TODO Auto-generated catch block
 	    e3.printStackTrace();
-	   }
+	}
 	if(wt==true) {
 		   pw=new PrintWriter(fw);
 		   pw.println(info);
 		   pw.flush();
 		   try {
 		    fw.flush();
-		   } catch (IOException e2) {
-		    // TODO Auto-generated catch block
-		    e2.printStackTrace();
+		   } catch(IOException e2) {
+			   // TODO Auto-generated catch block
+			   e2.printStackTrace();
 		   }
 		   pw.close();
 		   try {
 			   fw.close();
 		   } catch (IOException e2) {
-		    // TODO Auto-generated catch block
-		    e2.printStackTrace();
+			   // TODO Auto-generated catch block
+			   e2.printStackTrace();
 		   }
 	}
 	if(rd==true) {
@@ -81,12 +78,9 @@ public class GreetingServer extends Thread
    }
    
    
-   public void run()
-   {
-      while(true)
-      {
-         try
-         {
+   public void run(){
+      while(true){
+         try{
             System.out.println("等待远程连接，端口号为：" + serverSocket.getLocalPort() + "...");
             Socket server = serverSocket.accept();
             System.out.println("远程主机地址：" + server.getRemoteSocketAddress());
@@ -118,28 +112,22 @@ public class GreetingServer extends Thread
             br.close();
             is.close();
             server.close();
-         }catch(SocketTimeoutException s)
-         {
+         }catch(SocketTimeoutException s){
 //            System.out.println("Socket timed out!");
 //            break;
-         }catch(IOException e)
-         {
-            e.printStackTrace();
-            break;
+         }catch(IOException e){
+        	 e.printStackTrace();
+        	 break;
          }
       }
    }
   
-   public static void main(String [] args)
-   {
-	  
-      int port = 8080;
-      try
-      {
+   public static void main(String [] args){
+      int port = 6666;
+      try{
          Thread t = new GreetingServer(port);
          t.run();
-      }catch(IOException e)
-      {
+      }catch(IOException e){
          e.printStackTrace();
       }
    }

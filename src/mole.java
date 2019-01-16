@@ -13,23 +13,20 @@ public class mole extends JLabel implements Runnable {
     //地鼠是否被击中
     public boolean hit = false;
     protected Thread thread;// 将线程作为成员变量
-
     protected Container father;
     //地鼠持续的时间
     protected int show_time = 1000;
-
     protected int sleepTime=5;
-
     protected int bonus = 1;
     
-    public int getX()
-    {
+    public int getX(){
     	return position_x;
     }
-    public int getY()
-    {
+    
+    public int getY(){
     	return position_y;
     }
+    
     public mole(int x,int y,int time,int score,int num) {
     	super();
     	// 创建地鼠图标对象
@@ -61,7 +58,6 @@ public class mole extends JLabel implements Runnable {
         father.repaint();
         father = null; 
     }
-    
     
     protected class ComponentAction extends ComponentAdapter {
     	public void componentResized(final ComponentEvent e) {
@@ -96,7 +92,6 @@ public class mole extends JLabel implements Runnable {
     	public DieThread(int score){
     		bonus = score;
     	}
-    	
         public void run(){
         	try {
         		thread.stop();
