@@ -2,12 +2,12 @@
 import java.net.*;
 import java.io.*;
  
-public class GreetingServer extends Thread
+public class Server extends Thread
 {
    private ServerSocket serverSocket;
    private static String information;
    
-   public GreetingServer(int port) throws IOException{
+   public Server(int port) throws IOException{
       serverSocket = new ServerSocket(port);
    }
    
@@ -125,7 +125,7 @@ public class GreetingServer extends Thread
    public static void main(String [] args){
       int port = 6666;
       try{
-         Thread t = new GreetingServer(port);
+         Thread t = new Server(port);
          t.run();
       }catch(IOException e){
          e.printStackTrace();

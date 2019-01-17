@@ -95,7 +95,7 @@ public class Shop extends JFrame{
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
     			String msg = Player.name+","+Player.get_score()+","+Player.get_hp()+","+Player.get_money();
-    			GreetingClient write = new GreetingClient(msg);
+    			Client write = new Client(msg);
     			backgroundpanel.setImage(new ImageIcon(getClass().getResource("timg.jpg")).getImage());
     			backgroundpanel.repaint();
     			buy_hp.setVisible(false);

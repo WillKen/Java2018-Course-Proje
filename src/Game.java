@@ -89,7 +89,7 @@ public class Game extends JFrame {
         bu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String s = tf.getText().toString();
-				GreetingClient t = new GreetingClient(s);
+				Client t = new Client(s);
 				Player.name = t.getName();
 				System.out.println(Player.name);
 				Player.setscore(0);

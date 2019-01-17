@@ -1,17 +1,17 @@
 import java.net.*;
 import java.io.*;
  
-public class GreetingClient{
+public class Client{
 	private String info;
 	private String name;
 	private int score;
 	private int HP;
 	private int money;
 	
-	public GreetingClient() {
+	public Client() {
 	}
 	
-	public GreetingClient(String ss){
+	public Client(String ss){
 	  name = ss;
 	  score=0;
 	  HP = 4;
