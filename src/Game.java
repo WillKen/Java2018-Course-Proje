@@ -80,10 +80,10 @@ public class Game extends JFrame {
     public static void main(String[] args) {
     	Frame f = new Frame("请输入用户名");
         TextField tf = new TextField(20);
-        Button bu = new Button("确定");
-        f.setBounds(400, 200, 400, 300);
+        Button bu = new Button("OK");
+        f.setBounds(400, 200, 400, 100);
         f.setLayout(new FlowLayout());
-        bu = new Button("确定");
+        bu = new Button("OK");
         f.add(tf);
         f.add(bu);
         bu.addActionListener(new ActionListener() {
