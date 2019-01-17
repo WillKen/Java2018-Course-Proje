@@ -127,7 +127,7 @@ public class Game extends JFrame {
 		nextgame.start();
     }
     
-//    鼠标点击事件？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+//    鼠标点击事件，开始游戏
     private class MenuMouseListener1 extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
@@ -138,7 +138,7 @@ public class Game extends JFrame {
     	}
     }
     
-//    鼠标点击事件？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+//    鼠标点击事件，商店
     private class MenuMouseListener2 extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
@@ -178,7 +178,7 @@ public class Game extends JFrame {
 	    	shop.setSize(200,60);
 	    	shop.setLocation(690, 620);
 	    	shop.addMouseListener(new MenuMouseListener2());
-//	        产生新页面？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+//	        产生新页面
 	    	backgroundpanel.add(shop);
     	}
 //        若没有达成通关要求则直接输出分数
@@ -193,7 +193,7 @@ public class Game extends JFrame {
     	}
     }
     
-//    判断是否通关？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+//    判断是否通关
     public boolean getPass(){
 	   return this.is_pass;
     }
@@ -287,7 +287,7 @@ public class Game extends JFrame {
     	}
      }
     
-//    随机产生加分地鼠，炸弹等？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？/
+//    随机产生产生地鼠（1）、加分地鼠（2），炸弹（-1）
     private void gaming(){
         while(mouseNum>0&&Player.get_hp()!=0){
         	for(int i=0;i<8;i++){
