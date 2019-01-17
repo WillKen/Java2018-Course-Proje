@@ -90,11 +90,16 @@ public class Game extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String s = tf.getText().toString();
 				GreetingClient t = new GreetingClient(s);
-				Player.name = t.name;
+				Player.name = t.getName();
 				System.out.println(Player.name);
-				Player.setscore(t.score);
-				Player.sethp(t.HP);
-				Player.setmoney(t.money);
+				Player.setscore(0);
+				Player.sethp(t.getHP());
+				Player.setmoney(t.getMoney());
+				if(Player.get_hp()==0)
+				{
+					Player.setmoney(0);
+					Player.sethp(4);
+				}
 		    	Game game = Game.getInstance();
 		        game.setVisible(true);
 		        f.setVisible(false);

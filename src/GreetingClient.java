@@ -2,11 +2,11 @@ import java.net.*;
 import java.io.*;
  
 public class GreetingClient{
-	public String info;
-	public String name;
-	public int score;
-	public int HP;
-	public int money;
+	private String info;
+	private String name;
+	private int score;
+	private int HP;
+	private int money;
 	
 	public GreetingClient() {
 	}

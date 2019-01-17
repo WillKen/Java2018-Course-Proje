@@ -95,7 +95,6 @@ public class mole extends JLabel implements Runnable {
         public void run(){
         	try {
         		thread.stop();
-        		float time=0;
         		ImageIcon icon = new ImageIcon(getClass().getResource("die.png"));
         		if(bonus!=-1)
         		{
