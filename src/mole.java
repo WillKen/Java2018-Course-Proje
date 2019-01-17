@@ -5,16 +5,16 @@ import java.awt.event.*;
 
 public class mole extends JLabel implements Runnable {
 	protected static final long serialVersionUID = 1L;
-	//地鼠的位置
+//	地鼠的位置
     public int position_x = 0;
     public int position_y = 0;
-    //判断地鼠标号用的
+//    判断地鼠标号用的
     public int num = 0;
-    //地鼠是否被击中
+//    地鼠是否被击中
     public boolean hit = false;
     protected Thread thread;// 将线程作为成员变量
     protected Container father;
-    //地鼠持续的时间
+//    地鼠持续的时间
     protected int show_time = 1000;
     protected int sleepTime=5;
     protected int bonus = 1;
@@ -29,7 +29,7 @@ public class mole extends JLabel implements Runnable {
     
     public mole(int x,int y,int time,int score,int num) {
     	super();
-    	// 创建地鼠图标对象
+//    	创建地鼠图标对象
     	ImageIcon icon1 = new ImageIcon(getClass().getResource("mole.png"));
     	ImageIcon icon2 = new ImageIcon(getClass().getResource("bonusmole.png"));
     	ImageIcon icon3 = new ImageIcon(getClass().getResource("boom.png"));
@@ -39,7 +39,7 @@ public class mole extends JLabel implements Runnable {
     		setIcon(icon2);
     	else if(score == -1)
     		setIcon(icon3);
-    	// 添加控件事件监听器
+//    	添加控件事件监听器
     	addComponentListener(new ComponentAction());
     	this.show_time = time;
     	this.position_x = x;
@@ -49,7 +49,7 @@ public class mole extends JLabel implements Runnable {
     	thread = new Thread(this);// 创建线程对象
     }
     
-    //销毁地鼠图片
+//    销毁地鼠图片
     protected void destory() {
     	father = getParent();
     	if (father == null)
@@ -78,6 +78,7 @@ public class mole extends JLabel implements Runnable {
     	}
     }
     
+//    地鼠死亡的函数,在Game类中的mousebeHited类中调用
     public void Die(){
     	hit=true;
     	if(bonus == -1)
@@ -87,6 +88,7 @@ public class mole extends JLabel implements Runnable {
         diethread.start();
     }
     
+//    地鼠死亡线程
     public class DieThread extends Thread{
     	private int bonus = 1;
     	public DieThread(int score){

@@ -39,29 +39,27 @@ public class Game extends JFrame {
     private static JLabel MoneyLabel;
     private JLabel mouseLabel;
     private int sleepTime=2000;
-
-    //地鼠消失的间隔
     private int show_time = 1000;
-    //剩余地鼠的个数（待定）
     private static int mouseNum = 10;
-    //三个不同的难易程度的按钮
     private static JButton button;
     private static JButton shop;
     private static JButton nextLevel;
     private static JButton store;
     private static mole[] mouse;
-    //生成普通地鼠还是加分地鼠
     private int bonus;
 	private static Game instance = null;
+	
+//	单例模式
 	public static synchronized Game getInstance(){
 		if(instance==null)
 			instance = new Game();
 		return instance;
 	}
 	
+//	构造函数
     public Game(){
     	backgroundpanel= new Background();
-        backgroundpanel.setImage(new ImageIcon(getClass().getResource("logo.jpg")).getImage());// 设置背景图片
+        backgroundpanel.setImage(new ImageIcon(getClass().getResource("logo.jpg")).getImage());// 设置打地鼠背景图片
         getContentPane().add(backgroundpanel, BorderLayout.CENTER);
         setBounds(100, 100, 1600, 900);
         addMouseListener(new FrameMouseListener());
@@ -77,7 +75,9 @@ public class Game extends JFrame {
         mouse = new mole[8];
     }
     
+//    主函数
     public static void main(String[] args) {
+//    	首先输入用户名
     	Frame f = new Frame("请输入用户名");
         TextField tf = new TextField(20);
         Button bu = new Button("OK");
@@ -89,17 +89,23 @@ public class Game extends JFrame {
         bu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String s = tf.getText().toString();
+//				创建Client类，与Server连接
+//				Client的构造函数及字符串s,保证了s会传入服务端进行查询
 				Client t = new Client(s);
+//				将服务器传给客户端的参数传递过来
 				Player.name = t.getName();
 				System.out.println(Player.name);
+//				每次游戏分数置为0
 				Player.setscore(0);
 				Player.sethp(t.getHP());
 				Player.setmoney(t.getMoney());
+//				如果血量为0，重新开始
 				if(Player.get_hp()==0)
 				{
 					Player.setmoney(0);
 					Player.sethp(4);
 				}
+//				开始游戏界面
 		    	Game game = Game.getInstance();
 		        game.setVisible(true);
 		        f.setVisible(false);
@@ -108,6 +114,7 @@ public class Game extends JFrame {
         f.setVisible(true);
     }
 
+//    restart，进行下一关
     public void restart(){
     	scoreLabel.setVisible(false);
     	basicnum+=5;
@@ -120,6 +127,7 @@ public class Game extends JFrame {
 		nextgame.start();
     }
     
+//    鼠标点击事件？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
     private class MenuMouseListener1 extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
@@ -129,6 +137,8 @@ public class Game extends JFrame {
     		}
     	}
     }
+    
+//    鼠标点击事件？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
     private class MenuMouseListener2 extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
     		if(e.getButton()==e.BUTTON1){
@@ -138,19 +148,20 @@ public class Game extends JFrame {
     	}
     }
  
-    
+//    游戏结束
     private void gameOver() {
     	targetLabel.setVisible(false);
     	HPLabel.setVisible(false);
     	MoneyLabel.setVisible(false);
+//    	将地鼠隐藏
     	for(int i = 0;i<8;i++){
     		if(mouse[i] != null)
     			mouse[i].setVisible(false);
     	}
-    	
     	backgroundpanel.setImage(new ImageIcon(getClass().getResource("timg.jpg")).getImage());
         scoreLabel.setForeground(Color.blue);
-    	if(Player.get_score()>=target){
+//    	如果得分超过目标分数
+        if(Player.get_score()>=target){
     		this.is_pass = true;
 	    	backgroundpanel.repaint();
 	    	scoreLabel.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 88));
@@ -158,7 +169,7 @@ public class Game extends JFrame {
 	    	scoreLabel.setBounds(250, 200, 1000, 500);
 	    	ammoLabel.setVisible(false);
 	    	mouseLabel.setVisible(false);
-	    	
+//	    	商店
 	    	shop = new JButton("商店");
 	    	shop.setFont(new Font("宋体", Font.PLAIN, 32));
 	    	shop.setForeground(Color.blue);
@@ -167,9 +178,10 @@ public class Game extends JFrame {
 	    	shop.setSize(200,60);
 	    	shop.setLocation(690, 620);
 	    	shop.addMouseListener(new MenuMouseListener2());
-	        
+//	        产生新页面？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
 	    	backgroundpanel.add(shop);
     	}
+//        若没有达成通关要求则直接输出分数
     	else{
     		this.is_pass = false;
 	    	backgroundpanel.repaint();
@@ -181,35 +193,39 @@ public class Game extends JFrame {
     	}
     }
     
-   public boolean getPass()
-   {
+//    判断是否通关？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+    public boolean getPass(){
 	   return this.is_pass;
-   }
+    }
     
-    //为窗体添加鼠标左击事件
+//    为窗体添加鼠标左击事件，判断是否击中地鼠
     private final class FrameMouseListener extends MouseAdapter {
     	public void mousePressed(final MouseEvent e) {
-    		//传入鼠标事件e来判断是否击中地鼠
+//    		传入鼠标事件e来判断是否击中地鼠
     		if(e.getButton()==e.BUTTON1){
-    			//击中的话启动地鼠死亡的线程
+//    			击中的话启动地鼠击中的线程
                 mousebeHited mouse_be_hited=new mousebeHited(e);
                 mouse_be_hited.start();
             }
         }
     }
-    //击中得分
-    public static void addScore(int s){
-    	Player.addscore(s);
-    	Player.addmoney(10*s);
-	    scoreLabel.setText("当前得分："+Player.get_score());
-	    MoneyLabel.setText("$ "+Player.get_money());
-    }
     
-    public static void addHp(int s){
-    	Player.addhp(s);
-	    HPLabel.setText("HP "+Player.get_hp());
-    }
-     private class GameThread extends Thread{
+//     击中得分
+     public static void addScore(int s){
+    	 Player.addscore(s);
+    	 Player.addmoney(10*s);
+    	 scoreLabel.setText("当前得分："+Player.get_score());
+    	 MoneyLabel.setText("$ "+Player.get_money());
+     }
+    
+//     增加HP
+     public static void addHp(int s){
+    	 Player.addhp(s);
+    	 HPLabel.setText("HP "+Player.get_hp());
+     }
+    
+//    GameThread多线程
+    private class GameThread extends Thread{
     	public void run(){
     		button.setVisible(false);
             backgroundpanel.setImage(new ImageIcon(getClass().getResource("bg.jpg")).getImage());
@@ -268,9 +284,10 @@ public class Game extends JFrame {
 			}
     		gaming();
             gameOver();
-    }
-}
+    	}
+     }
     
+//    随机产生加分地鼠，炸弹等？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？/
     private void gaming(){
         while(mouseNum>0&&Player.get_hp()!=0){
         	for(int i=0;i<8;i++){
@@ -307,13 +324,13 @@ public class Game extends JFrame {
         } 
     }
     
-    //该线程用于监听是否有地鼠被打中
+//    该线程用于监听是否有地鼠被打中
     private class mousebeHited extends Thread{
-    	//大写的Mouse指鼠标，小写的指地鼠
+//    	大写的Mouse指鼠标，小写的指地鼠
         private final MouseEvent Mouse;
         private int i;
         private int j;
-        //构造函数
+//        构造函数
         public mousebeHited(final MouseEvent e){
             this.Mouse=e;
             i=e.getX();
@@ -322,23 +339,22 @@ public class Game extends JFrame {
         
         public void run(){
             Boolean flag = false;
-            
             for(int a = 0;a<8;a++){
                 i=Mouse.getX();
                 j=Mouse.getY();
             	if(mouse[a]!=null&&!mouse[a].hit){
-            		//如果击中地鼠的范围
+//            		击中地鼠的范围
             		flag=(i>=mouse[a].getX()&&i<mouse[a].getX()+300)&&(j>=mouse[a].getY()&&j<=mouse[a].getY()+300);
             	}
             	if(flag&&mouse[a]!=null){
-            		//调用该地鼠的死亡函数
+//            		调用该地鼠的死亡函数
             		mouse[a].Die();
             	}
             }    
         }
     }
 
-    //移走地鼠
+//    从数组中移出地鼠
     public static void removemouse(int i){
         mouse[i]=null;
     }

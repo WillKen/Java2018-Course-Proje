@@ -11,6 +11,7 @@ public class Server extends Thread
       serverSocket = new ServerSocket(port);
    }
    
+//   数据交换
    public static void DataExchange(String info,boolean rd,boolean wt){
 	information="NULL";
 	PrintWriter pw=null;
@@ -22,6 +23,7 @@ public class Server extends Thread
 	    // TODO Auto-generated catch block
 	    e3.printStackTrace();
 	}
+//	写操作
 	if(wt==true) {
 		   pw=new PrintWriter(fw);
 		   pw.println(info);
@@ -40,6 +42,7 @@ public class Server extends Thread
 			   e2.printStackTrace();
 		   }
 	}
+//	读操作
 	if(rd==true) {
 	       BufferedReader reader = null;
 	       try {
@@ -85,15 +88,16 @@ public class Server extends Thread
             Socket server = serverSocket.accept();
             System.out.println("远程主机地址：" + server.getRemoteSocketAddress());
 
-            //获得输入流
+//            获得输入流
             InputStream is=server.getInputStream();
             BufferedReader br=new BufferedReader(new InputStreamReader(is));
-            //获得输出流
+//            获得输出流
             OutputStream os=server.getOutputStream();
             PrintWriter pw=new PrintWriter(os);
-            //读取用户输入信息
+//            读取用户输入信息
             String info=null;
             while(!((info=br.readLine())==null)){
+//            	如果输入的信息中存在",",则表明是写操作,否则为查询(读)操作
             	int pos=info.indexOf(',');
             	if(pos==-1) {
             		DataExchange(info,true,false);
@@ -102,11 +106,11 @@ public class Server extends Thread
             		DataExchange(info,false,true);
             	}
             }
-            //给客户一个响应
+//            给客户一个响应
             String reply=information;
             pw.write(reply);
             pw.flush();
-            //5.关闭资源
+//            关闭资源
             pw.close();
             os.close();
             br.close();
